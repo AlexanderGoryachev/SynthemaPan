@@ -24,11 +24,6 @@ namespace Synthema
 
             if (!AppData.IsInternetAccess)
                 MessageBox.Show("Подключение к Интернету отсутствует. Для работы приложения необходим доступ к сети");
-
-            //if (AppData.IsMainDownloaded)
-            //    LoadingBar.IsIndeterminate = false;
-            //else
-            //    LoadingBar.IsIndeterminate = true;
         }
 
         public void DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
@@ -47,8 +42,10 @@ namespace Synthema
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (AppData.IsShortReleasesListOn) SetShortList();
-            else SetDetailedList();
+            if (AppData.IsShortReleasesListOn) 
+                SetShortList();
+            else 
+                SetDetailedList();
 
             if (AppData.IsMainDownloaded)
                 LoadingBar.IsIndeterminate = false;

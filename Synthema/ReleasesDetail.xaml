@@ -266,7 +266,7 @@
                                    FontFamily="Segoe WP Light"
                                    FontSize="36"
                                    Foreground="#FFFFC800"
-                                   Margin="0,0,0,12"
+                                   Margin="0,0,0,24"
                                    Visibility="Collapsed"/>
                         <ListBox x:Name="VideoListBox" 
                                  ScrollViewer.VerticalScrollBarVisibility="Disabled">
@@ -287,6 +287,17 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
+                        <StackPanel x:Name="RatingStackPanel" Orientation="Horizontal">
+                            <toolkit:Rating x:Name="VotesRating"
+                                            ReadOnly="True" 
+                                            Background="{x:Null}"
+                                            HorizontalAlignment="Left"
+                                            Margin="0,0,12,0"/>
+                            <TextBlock x:Name="VotesCountTextBlock"
+                                       FontSize="24" 
+                                       FontFamily="Segoe WP Light" 
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
                     </StackPanel>
                 </ScrollViewer>
             </phone:PivotItem>

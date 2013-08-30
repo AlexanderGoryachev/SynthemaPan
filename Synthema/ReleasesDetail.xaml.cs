@@ -79,6 +79,21 @@ namespace Synthema
 
             try
             {
+                var votesPercent = doc.DocumentNode.SelectSingleNode(@".//*[@id='dle-content']/div[@class='theblock']/div[@class='rateblock']/div[@class='rate']/div[@class='rating'][1]/ul/li").InnerText;
+                VotesRating.Value = Convert.ToByte(votesPercent) / 20;
+                var votesCount = doc.DocumentNode.SelectSingleNode(@".//*[@id='dle-content']/div[@class='theblock']/div[@class='rateblock']/div[@class='rate']/div[@class='rating'][2]").InnerText;
+                VotesCountTextBlock.Text = HttpUtility.HtmlDecode(votesCount);
+                RatingStackPanel.Visibility = Visibility.Visible;
+            }
+            catch 
+            {
+                RatingStackPanel.Visibility = Visibility.Collapsed;
+            }
+
+
+
+            try
+            {
                 var coverImageBaseNode = doc.DocumentNode.SelectSingleNode(@".//*[@id='dle-content']/div[@class='theblock']/div[@class='newf']/div/div[1]/a");
                 coverUri = new Uri(Constants.BaseUrl + coverImageBaseNode.SelectSingleNode("img").GetAttributeValue("src", ""), UriKind.Absolute);
                 CoverImage.Source = new BitmapImage(coverUri);

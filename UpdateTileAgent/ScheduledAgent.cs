@@ -52,7 +52,6 @@ namespace UpdateTileAgent
             WebClient webClient = new WebClient();
             webClient.DownloadStringAsync(new Uri("http://synthema.ru"));
             webClient.DownloadStringCompleted += new DownloadStringCompletedEventHandler(DownloadStringCompleted);
-
         }
 
         private void DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
@@ -70,8 +69,8 @@ namespace UpdateTileAgent
             {
                 thumbUrl = "http://www.synthema.ru" + node.SelectSingleNode(@"div[@class='news']/div/div[1]//img").GetAttributeValue("src", "");
                 imgUrl = string.Empty;
-                try { imgUrl = node.SelectSingleNode(@"div[@class='news']/div/div[1]/a").GetAttributeValue("href", ""); }
-                catch { imgUrl = thumbUrl; }
+                //try { imgUrl = node.SelectSingleNode(@"div[@class='news']/div/div[1]/a").GetAttributeValue("href", ""); }
+                //catch { imgUrl = thumbUrl; }
             }
 
             ShellTile apptile = ShellTile.ActiveTiles.First();
@@ -79,10 +78,10 @@ namespace UpdateTileAgent
 
             appFlipTileData.BackTitle = " ";
             appFlipTileData.BackContent = " ";
-            appFlipTileData.WideBackContent = " ";
+            //appFlipTileData.WideBackContent = " ";
 
             appFlipTileData.BackBackgroundImage = new Uri(thumbUrl, UriKind.Absolute);
-            appFlipTileData.WideBackBackgroundImage = new Uri(imgUrl, UriKind.Absolute);
+            //appFlipTileData.WideBackBackgroundImage = new Uri(imgUrl, UriKind.Absolute);
 
             apptile.Update(appFlipTileData);
 

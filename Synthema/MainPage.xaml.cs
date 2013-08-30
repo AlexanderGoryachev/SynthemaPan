@@ -39,7 +39,14 @@ namespace Synthema
                     myPeriodicTask = new PeriodicTask(UpdateTileAgentName);
                     myPeriodicTask.Description = "Agent-Tile";
 
-                    try { ScheduledActionService.Add(myPeriodicTask); }
+                    try 
+                    { 
+                        ScheduledActionService.Add(myPeriodicTask);
+                        #if DEBUG
+                            if (System.Diagnostics.Debugger.IsAttached == true)
+                                ScheduledActionService.LaunchForTest(UpdateTileAgentName, TimeSpan.FromSeconds(10));
+                        #endif
+                    }
                     catch (Exception ex) { MessageBox.Show("Невозможно создать сервис:" + ex.Message); }
                 }
             }       

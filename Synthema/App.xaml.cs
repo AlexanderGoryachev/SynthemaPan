@@ -88,8 +88,6 @@ namespace Synthema
                 AppData.IsInternetAccess = false;
             else
                 AppData.IsInternetAccess = true;
-
-            DownloadingService.DownloadString(Constants.BaseUrl);
         }
 
         // Code to execute when the application is activated (brought to foreground)
