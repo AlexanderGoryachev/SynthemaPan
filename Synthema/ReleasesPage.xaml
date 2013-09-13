@@ -1,0 +1,230 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="Synthema.ReleasesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False">
+    
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:SlideTransition Mode="SlideUpFadeIn" />
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:SlideTransition Mode="SlideUpFadeIn"/>
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:SlideTransition Mode="SlideDownFadeOut"/>
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:SlideTransition Mode="SlideDownFadeOut"/>
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
+
+    <phone:PhoneApplicationPage.Resources>
+        <shell:ApplicationBar x:Key="ShortMainAppBar" IsVisible="True" Mode="Minimized">
+            <shell:ApplicationBarIconButton x:Name="DChangeListAppButton" IconUri="/Assets/AppBar/new.png" Text="подробный список" Click="SetDetailedListAppButton_Click" />
+            <shell:ApplicationBarIconButton x:Name="DRefreshMainAppButton" IconUri="/Assets/AppBar/refresh.png" Text="Обновить" Click="RefreshAppButton_Click" />
+        </shell:ApplicationBar>
+        <shell:ApplicationBar x:Key="DetailedMainAppBar" IsVisible="True" Mode="Minimized">
+            <shell:ApplicationBarIconButton x:Name="SChangeListAppButton" IconUri="/Toolkit.Content/minus.png" Text="краткий список" Click="SetShortListAppButton_Click" />
+            <shell:ApplicationBarIconButton x:Name="SRefreshMainAppButton" IconUri="/Assets/AppBar/refresh.png" Text="Обновить" Click="RefreshAppButton_Click" />
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.Resources>
+
+            <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" >
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/bg.png" Stretch="None"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text=" " Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="релизы" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <!-- Краткий список -->
+
+            <ListBox x:Name="MainListBox" 
+                            Margin="12,0,0,0" 
+                            VerticalContentAlignment="Top" 
+                            HorizontalContentAlignment="Stretch">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel x:Name="DetailedList" 
+                                    Margin="0,0,12,0"
+                                    Tap="MainStackPanel_Tap">
+
+                            <StackPanel Width="432" >
+                                <TextBlock Grid.Row="0" 
+                                           TextWrapping="Wrap" 
+                                           Text="{Binding GroupTitle}" 
+                                           FontSize="40"  
+                                           Width="432"
+                                           VerticalAlignment="Center" 
+                                           Foreground="#FFFFC800" 
+                                           FontFamily="Segoe WP Light" />
+                                <TextBlock Grid.Row="0" 
+                                           TextWrapping="Wrap" 
+                                           Text="{Binding AlbumTitle}" 
+                                           FontSize="24"
+                                           Width="432"
+                                           Margin="0,0,0,24" 
+                                           VerticalAlignment="Center" 
+                                           Foreground="White" 
+                                           FontFamily="Segoe WP Light" />
+                            </StackPanel>
+
+                            <Grid Grid.Row="1" 
+                                  VerticalAlignment="Top" 
+                                  Margin="0,0,0,24" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,24">
+                                    <StackPanel Orientation="Horizontal"
+                                                Background="Black"
+                                                Margin="0,0,12,0"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Top"
+                                                MinHeight="172" >
+                                        <Image Source="{Binding ThumbUrl}" 
+                                               Width="172"
+                                               Grid.Column="0"   
+                                               HorizontalAlignment="Left" 
+                                               VerticalAlignment="Center"
+                                               Tap="MainImage_Tap" />
+                                    </StackPanel>
+                                    <TextBlock Width="246"
+                                               Text="{Binding Details}"
+                                               FontFamily="Segoe WP Light"
+                                               TextWrapping="Wrap" 
+                                               Foreground="#FFCCCCCC" 
+                                               Margin="0,-8,0,0"/>
+                                </StackPanel>
+
+                                <TextBlock Text="{Binding Description}" 
+                                           FontSize="24" 
+                                           Grid.Row="2" 
+                                           Grid.ColumnSpan="2" 
+                                           FontFamily="Segoe WP Light"
+                                           TextWrapping="Wrap" 
+                                           Foreground="#FFFFFFFF" />
+                            </Grid>
+
+                            <TextBlock Text="{Binding PubDate}" 
+                                       Grid.Row="2" TextWrapping="Wrap" 
+                                       FontSize="18" 
+                                       Foreground="#FFCCCCCC"
+                                       Margin="0,-6,0,36"
+                                       FontFamily="Segoe WP Light"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+
+            <!-- Краткий список -->
+            <ListBox x:Name="ShortMainListBox" 
+                     Margin="12,0,0,0" 
+                     VerticalContentAlignment="Top" 
+                     HorizontalContentAlignment="Stretch"
+                     Visibility="Collapsed"
+                            >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid x:Name="ShortList"                                
+                              Margin="0,0,12,12"
+                              Width="432">
+                            <!-- 24 + 432 + 24 = 480 -->
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="184" />
+                                <!-- image 172 + margin 12-->
+                                <ColumnDefinition Width="*" />
+                                <!-- 248 -->
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Orientation="Horizontal"
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        VerticalAlignment="Top"
+                                        MinHeight="172" 
+                                        Margin="0,0,0,0">
+                                <Image x:Name="AnimatedImage" 
+                                       Source="{Binding ThumbUrl}" 
+                                       Width="172"   
+                                       HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center"
+                                       Tap="MainImage_Tap" />
+                            </StackPanel>
+
+                            <StackPanel Width="248"
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Margin="0,0,0,24" 
+                                        Orientation="Vertical"
+                                        VerticalAlignment="Stretch"
+                                        Tap="MainStackPanel_Tap">
+                                <TextBlock Width="248"
+                                           Text="{Binding GroupTitle}"
+                                           TextWrapping="Wrap" 
+                                           FontFamily="Segoe WP Light"
+                                           Foreground="#FFFFC800" 
+                                           FontSize="34"
+                                           Margin="0,-12,0,0"/>
+                                <TextBlock Width="248"
+                                           Text="{Binding AlbumTitle}"
+                                           FontFamily="Segoe WP Light"
+                                           Foreground="#FFFFFFFF"
+                                           FontSize="24"
+                                           TextWrapping="Wrap" />
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+
+        <Image Source="/Assets/logo.png"
+               HorizontalAlignment="Left" 
+               Height="35" Margin="19,16,0,0" 
+               VerticalAlignment="Top" 
+               Width="225" />
+
+        <ProgressBar x:Name="LoadingBar"
+                     Background="{x:Null}"                     
+                     Foreground="#FFFFC800" 
+                     VerticalAlignment="Top"
+                     IsIndeterminate="True" />
+    </Grid>
+
+</phone:PhoneApplicationPage>
