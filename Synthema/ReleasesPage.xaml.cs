@@ -39,7 +39,7 @@ namespace Synthema
             AppData.MainString = e.Result;
 
             // Функции парсинга выполняются 5,5 секунд. Необходимо оптимизировать.
-            ParsingService.ParseMainHtml(e.Result);
+            ParsingService.ParseReleasesHtml(e.Result);
             ParsingService.ParseNewsHtml(e.Result);
 
             AppData.IsMainDownloaded = true;

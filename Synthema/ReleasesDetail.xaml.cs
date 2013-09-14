@@ -20,7 +20,7 @@ namespace Synthema
 {
     public partial class NewsDetail : PhoneApplicationPage
     {
-        private string _mainDetailPath = string.Empty;
+        private string _releasesDetailPath = string.Empty;
         private Uri coverUri;
 
         public NewsDetail()
@@ -34,8 +34,8 @@ namespace Synthema
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            _mainDetailPath = NavigationContext.QueryString["mainDetailPath"].ToString();
-            DownloadMainDetail(_mainDetailPath);
+            _releasesDetailPath = NavigationContext.QueryString["releasesDetailPath"].ToString();
+            DownloadMainDetail(_releasesDetailPath);
         }
 
         private void DownloadMainDetail(string Path)
@@ -43,11 +43,11 @@ namespace Synthema
             WebClient newsDetails = new WebClient();
             newsDetails.Encoding = new Windows1251Encoding();
             newsDetails.DownloadStringAsync(new Uri(Path));
-            newsDetails.DownloadStringCompleted += new DownloadStringCompletedEventHandler(DownloadMainDetailStringCompleted);
+            newsDetails.DownloadStringCompleted += new DownloadStringCompletedEventHandler(DownloadReleasesDetailStringCompleted);
             TopPageProgressBar.IsIndeterminate = true;
         }
 
-        private void DownloadMainDetailStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        private void DownloadReleasesDetailStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
             if (e.Error != null)
                 return;
@@ -313,7 +313,7 @@ namespace Synthema
                     {
                         GroupTitle = fullTitle.Substring(0, fullTitle.IndexOf("- ")),
                         AlbumTitle = fullTitle.Remove(0, fullTitle.IndexOf("- ") + 2),
-                        Url = "/MainDetail.xaml?mainDetailPath=" + node.GetAttributeValue("href", "")
+                        Url = "/ReleasesDetail.xaml?releasesDetailPath=" + node.GetAttributeValue("href", "")
                     });
                 }
             }
@@ -329,7 +329,7 @@ namespace Synthema
         private void OpenInBrowser_Click(object sender, EventArgs e)
         {
             WebBrowserTask openInBrowser = new WebBrowserTask();
-            openInBrowser.Uri = new Uri(_mainDetailPath, UriKind.Absolute);
+            openInBrowser.Uri = new Uri(_releasesDetailPath, UriKind.Absolute);
             openInBrowser.Show();
         }
 

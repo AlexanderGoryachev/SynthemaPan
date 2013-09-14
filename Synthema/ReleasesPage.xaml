@@ -106,19 +106,13 @@
                                 </Grid.RowDefinitions>
 
                                 <StackPanel Orientation="Horizontal" Margin="0,0,0,24">
-                                    <StackPanel Orientation="Horizontal"
-                                                Background="Black"
-                                                Margin="0,0,12,0"
-                                                HorizontalAlignment="Left"
-                                                VerticalAlignment="Top"
-                                                MinHeight="172" >
-                                        <Image Source="{Binding ThumbUrl}" 
-                                               Width="172"
-                                               Grid.Column="0"   
-                                               HorizontalAlignment="Left" 
-                                               VerticalAlignment="Center"
-                                               Tap="MainImage_Tap" />
-                                    </StackPanel>
+                                    <Image Source="{Binding ThumbUrl}" 
+                                            Width="172"
+                                            Margin="0,0,12,0"
+                                            Grid.Column="0"   
+                                            HorizontalAlignment="Left" 
+                                            VerticalAlignment="Center"
+                                            Tap="MainImage_Tap" />
                                     <TextBlock Width="246"
                                                Text="{Binding Details}"
                                                FontFamily="Segoe WP Light"
@@ -142,7 +136,13 @@
                                        Foreground="#FFCCCCCC"
                                        Margin="0,-6,0,36"
                                        FontFamily="Segoe WP Light"/>
-                        </StackPanel>           <!-- Краткий список -->
+                        </StackPanel>
+
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            
+            <!-- Краткий список -->
             <ListBox x:Name="ShortMainListBox" 
                      Margin="12,0,0,0" 
                      VerticalContentAlignment="Top" 
