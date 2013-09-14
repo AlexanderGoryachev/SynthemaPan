@@ -149,6 +149,7 @@
     <Content Include="Assets\AppBar\next.png" />
     <Content Include="Assets\AppBar\refresh.png" />
     <Content Include="Assets\bg.png" />
+    <Content Include="Assets\lastfm.png" />
     <Content Include="Assets\logo.png" />
     <Content Include="Assets\mail.png" />
     <Content Include="Assets\pause.png" />
@@ -157,6 +158,9 @@
     <Content Include="Assets\play_prs.png" />
     <Content Include="Assets\rate.png" />
     <Content Include="Assets\sr4.jpg" />
+    <Content Include="Assets\synthema_logo.png" />
+    <Content Include="Assets\synthema_logo_small.png" />
+    <Content Include="Assets\twitter.png" />
     <Content Include="README_FIRST.txt" />
     <Resource Include="Assets\PanoramaBackground.png" />
     <Content Include="Assets\AlignmentGrid.png" />

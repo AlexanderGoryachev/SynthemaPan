@@ -52,7 +52,7 @@ namespace Synthema
             if (e.Error != null)
                 return;
 
-            ParseMainDetailHtml(e.Result);
+            ParseReleasesDetail(e.Result);
 
             CommentsListBox.ItemsSource = AppData.Comments;
             SimilarListBox.ItemsSource = AppData.SimilarLinks;
@@ -60,7 +60,7 @@ namespace Synthema
             TopPageProgressBar.IsIndeterminate = false;
         }
 
-        private void ParseMainDetailHtml(string HtmlString)
+        private void ParseReleasesDetail(string HtmlString)
         {
             AppData.Comments.Clear();
 

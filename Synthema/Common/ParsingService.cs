@@ -10,7 +10,7 @@ namespace Synthema.Common
 {
     class ParsingService
     {
-        public static void ParseMainHtml(string HtmlString)
+        public static void ParseReleasesHtml(string HtmlString)
         {
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(HtmlString);

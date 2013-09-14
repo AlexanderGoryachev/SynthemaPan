@@ -142,13 +142,7 @@
                                        Foreground="#FFCCCCCC"
                                        Margin="0,-6,0,36"
                                        FontFamily="Segoe WP Light"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-
-
-            <!-- Краткий список -->
+                        </StackPanel>           <!-- Краткий список -->
             <ListBox x:Name="ShortMainListBox" 
                      Margin="12,0,0,0" 
                      VerticalContentAlignment="Top" 

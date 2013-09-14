@@ -62,7 +62,7 @@
         <!--Panorama control-->
         <phone:Panorama>
             <phone:Panorama.Title>
-                <Image Source="Assets/logo.png" Width="1000" Margin="0,30,0,0"/>
+                <Image Source="/Assets/synthema_logo.png" Width="1000" Margin="18,60,0,0"/>
             </phone:Panorama.Title>
 
             <phone:Panorama.Background>
@@ -88,7 +88,9 @@
                 <ListBox>
                     <ListBoxItem>
                         <StackPanel Orientation="Horizontal" Margin="12,2,0,4" Height="105" Width="432">
-                            <Border BorderThickness="1" Width="99" Height="99" BorderBrush="#FFFFC800" Background="#FFFFC800"/>
+                            <Border BorderThickness="1" Width="99" Height="99" BorderBrush="#FFFFC800" Background="#FFFFC800">
+                                <Image Source="/Assets/rate.png" Stretch="Fill" Width="64" Height="64"/>
+                            </Border>
                             <StackPanel Width="311" Margin="8,-7,0,0">
                                 <TextBlock Text="synthema.ru" TextWrapping="Wrap" Margin="10,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" />
                                 <TextBlock Text="официальный сайт" TextWrapping="Wrap" Margin="10,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}" />
@@ -98,7 +100,9 @@
 
                     <ListBoxItem>
                         <StackPanel Orientation="Horizontal" Margin="12,2,0,4" Height="105" Width="432">
-                            <Border BorderThickness="1" Width="99" Height="99" BorderBrush="#FFFFC800" Background="#FFFFC800"/>
+                            <Border BorderThickness="1" Width="99" Height="99" BorderBrush="#FFFFC800" Background="#FFFFC800">
+                                <Image Source="/Assets/twitter.png" Stretch="Fill" Width="64" Height="64"/>
+                            </Border>
                             <StackPanel Width="311" Margin="8,-7,0,0">
                                 <TextBlock Text="twitter" TextWrapping="Wrap" Margin="10,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" />
                                 <TextBlock TextWrapping="Wrap" Margin="10,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}">
@@ -110,7 +114,10 @@
 
                     <ListBoxItem>
                         <StackPanel Orientation="Horizontal" Margin="12,2,0,4" Height="105" Width="432">
-                            <Border BorderThickness="1" Width="99" Height="99" BorderBrush="#FFFFC800" Background="#FFFFC800"/>
+                            <Border BorderThickness="1" Width="99" Height="99" BorderBrush="#FFFFC800" Background="#FFFFC800">
+                                <Image Source="/Assets/lastfm.png" Stretch="Fill" Width="64" Height="64"/>
+                            </Border>
+                                    
                             <StackPanel Width="311" Margin="8,-7,0,0">
                                 <TextBlock Text="last.fm" TextWrapping="Wrap" Margin="10,0" Style="{StaticResource PhoneTextExtraLargeStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" />
                                 <TextBlock TextWrapping="Wrap" Margin="10,-2,10,0" Style="{StaticResource PhoneTextSubtleStyle}">
