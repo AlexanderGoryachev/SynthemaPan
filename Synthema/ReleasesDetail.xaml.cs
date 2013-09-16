@@ -87,9 +87,16 @@ namespace Synthema
             catch (NullReferenceException)
             {
                 var coverImageBaseNode = doc.DocumentNode.SelectSingleNode(@".//*[@id='dle-content']/div[@class='theblock']/div[@class='newf']/div/div[1]");
-                coverUri = new Uri(Constants.BaseUrl + coverImageBaseNode.SelectSingleNode("img").GetAttributeValue("src", ""), UriKind.Absolute);
-                CoverImage.Source = new BitmapImage(coverUri);
-                BackgroundCoverImage.Visibility = Visibility.Visible;
+                try
+                {
+                    coverUri = new Uri(Constants.BaseUrl + coverImageBaseNode.SelectSingleNode("img").GetAttributeValue("src", ""), UriKind.Absolute);
+                    CoverImage.Source = new BitmapImage(coverUri);
+                    BackgroundCoverImage.Visibility = Visibility.Visible;
+                }
+                catch
+                {
+                    BackgroundCoverImage.Visibility = Visibility.Collapsed;
+                }
             }
 
             try
@@ -298,31 +305,32 @@ namespace Synthema
             var commentsParasingTime = commentsWatch.Elapsed.Milliseconds.ToString();
             #endregion
 
-            #region Similar links
+            //#region Similar links
 
-            try
-            {
-                HtmlNode similarLinksBaseNode = doc.DocumentNode.SelectSingleNode(@".//div[@id='dle-content']/div[@class='theblock']");
-                HtmlNodeCollection similarLinks = similarLinksBaseNode.SelectNodes(@"div[@class='stext']/ul/li/a");
+            //try
+            //{
+            //    HtmlNode similarLinksBaseNode = doc.DocumentNode.SelectSingleNode(@".//div[@id='dle-content']/div[@class='theblock']");
+            //    HtmlNodeCollection similarLinks = similarLinksBaseNode.SelectNodes(@"div[@class='stext']/ul/li/a");
 
-                foreach (HtmlNode node in similarLinks)
-                {
-                    var fullTitle = node.InnerText;
-                    fullTitle = HttpUtility.HtmlDecode(fullTitle);
-                    AppData.SimilarLinks.Add(new AppData.SimilarLink
-                    {
-                        GroupTitle = fullTitle.Substring(0, fullTitle.IndexOf("- ")),
-                        AlbumTitle = fullTitle.Remove(0, fullTitle.IndexOf("- ") + 2),
-                        Url = "/ReleasesDetail.xaml?releasesDetailPath=" + node.GetAttributeValue("href", "")
-                    });
-                }
-            }
-            catch (NullReferenceException)
-            {
-                NoSimilarTextBlock.Visibility = Visibility.Visible;
-            }
+            //    AppData.SimilarLinks.Clear();
+            //    foreach (HtmlNode node in similarLinks)
+            //    {
+            //        var fullTitle = node.InnerText;
+            //        fullTitle = HttpUtility.HtmlDecode(fullTitle);
+            //        AppData.SimilarLinks.Add(new AppData.SimilarLink
+            //        {
+            //            GroupTitle = fullTitle.Substring(0, fullTitle.IndexOf("- ")),
+            //            AlbumTitle = fullTitle.Remove(0, fullTitle.IndexOf("- ") + 2),
+            //            Url = "/ReleasesDetail.xaml?releasesDetailPath=" + node.GetAttributeValue("href", "")
+            //        });
+            //    }
+            //}
+            //catch (NullReferenceException)
+            //{
+            //    NoSimilarTextBlock.Visibility = Visibility.Visible;
+            //}
 
-            #endregion
+            //#endregion
 
         }
 

@@ -38,9 +38,8 @@ namespace Synthema
 
             AppData.MainString = e.Result;
 
-            // Функции парсинга выполняются 5,5 секунд. Необходимо оптимизировать.
+            // Функции парсинга выполняются 5,5 секунд. Необходимо оптимизировать. UPD. Удалил парсинг News
             ParsingService.ParseReleasesHtml(e.Result);
-            ParsingService.ParseNewsHtml(e.Result);
 
             AppData.IsMainDownloaded = true;
             LoadingBar.IsIndeterminate = false;
@@ -48,38 +47,33 @@ namespace Synthema
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (MainListBox.Visibility == Visibility.Visible)
-                ApplicationBar = (Microsoft.Phone.Shell.ApplicationBar)Resources["DetailedMainAppBar"];
-            else
-                ApplicationBar = (Microsoft.Phone.Shell.ApplicationBar)Resources["ShortMainAppBar"];
+            if (AppData.IsShortListOn) SetShortList();
+            else SetDetailedList();
 
-            if (!AppData.IsMainDownloaded)
-                DownloadingService.DownloadMainAndNews(Constants.BaseUrl);
-            else
-                LoadingBar.IsIndeterminate = false;
+            if (AppData.IsMainDownloaded) LoadingBar.IsIndeterminate = false;
+            else DownloadingService.DownloadMainAndNews(Constants.BaseUrl);
 
             base.OnNavigatedTo(e);
         }
 
         private void MainImage_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            string imgUrl = AppData.MainItems.ElementAt(MainListBox.SelectedIndex).ImgUrl;
-            if (imgUrl != "")
-            {
-                NavigationService.Navigate(new Uri("/ImagePage.xaml?imgUrl=" + imgUrl, UriKind.Relative));
-            }
+            int index;
+            if (AppData.IsShortListOn) index = ShortMainListBox.SelectedIndex;
+            else index = MainListBox.SelectedIndex;
+
+            string imgUrl = AppData.MainItems.ElementAt(index).ImgUrl;
+            NavigationService.Navigate(new Uri("/ImagePage.xaml?imgUrl=" + imgUrl, UriKind.Relative));
         }
 
         private void MainStackPanel_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            if (MainListBox.SelectedItem != null)
-            {
-                //WebBrowserTask task = new WebBrowserTask();
-                //task.Uri = new Uri(AppData.MainItems.ElementAt(MainListBox.SelectedIndex).Link, UriKind.RelativeOrAbsolute);
-                //task.Show();
-                var mainDetailPath = AppData.MainItems.ElementAt(MainListBox.SelectedIndex).Link;
-                NavigationService.Navigate(new Uri("/ReleasesDetail.xaml?mainDetailPath=" + mainDetailPath, UriKind.Relative));
-            }
+            int index;
+            if (AppData.IsShortListOn) index = ShortMainListBox.SelectedIndex;
+            else index = MainListBox.SelectedIndex;
+
+            var releasesDetailPath = AppData.MainItems.ElementAt(index).Link;
+            NavigationService.Navigate(new Uri("/ReleasesDetail.xaml?releasesDetailPath=" + releasesDetailPath, UriKind.Relative));
         }
 
         protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
@@ -96,12 +90,24 @@ namespace Synthema
 
         private void SetShortListAppButton_Click(object sender, EventArgs e)
         {
+            SetShortList();
+            AppData.IsShortListOn = true;
+        }
+
+        private void SetDetailedListAppButton_Click(object sender, EventArgs e)
+        {
+            SetDetailedList();
+            AppData.IsShortListOn = false;
+        }
+
+        private void SetShortList()
+        {
             ApplicationBar = (Microsoft.Phone.Shell.ApplicationBar)Resources["ShortMainAppBar"];
             MainListBox.Visibility = Visibility.Collapsed;
             ShortMainListBox.Visibility = Visibility.Visible;
         }
 
-        private void SetDetailedListAppButton_Click(object sender, EventArgs e)
+        private void SetDetailedList()
         {
             ApplicationBar = (Microsoft.Phone.Shell.ApplicationBar)Resources["DetailedMainAppBar"];
             MainListBox.Visibility = Visibility.Visible;

@@ -142,38 +142,31 @@ namespace Synthema
 
         private void UpdateLiveTile()
         {
-            if (AppData.IsLiveTileOn)
+            string backContent;
+            string backTitle;
+
+            var index = 0;
+            while (AppData.MainItems[index].ImgUrl == string.Empty)
             {
-                string backContent;
-                string backTitle;
-
-                var index = 0;
-                while (AppData.MainItems[index].ImgUrl == string.Empty)
-                {
-                    index++;
-                }
-
-                if (AppData.IsLiveTileSignsOn)
-                {
-                    backContent = AppData.MainItems[index].GroupTitle;
-                    backTitle = AppData.MainItems[index].AlbumTitle;
-                }
-                else
-                {
-                    backContent = string.Empty;
-                    backTitle = string.Empty;
-                }
-
-
-                var wideBackImage = new Uri(AppData.MainItems[index].ImgUrl);
-                var backImage = new Uri(AppData.MainItems[index].ThumbUrl);
-
-                AppData.ChangeBackFlipTileData(backTitle, backContent, backImage, backContent, wideBackImage);
+                index++;
             }
-            else
-            {
-                AppData.ChangeBackFlipTileData(null, null, null, null, null);
-            }
+
+            //if (AppData.IsLiveTileSignsOn)
+            //{
+            //    backContent = AppData.MainItems[index].GroupTitle;
+            //    backTitle = AppData.MainItems[index].AlbumTitle;
+            //}
+            //else
+            //{
+                backContent = string.Empty;
+                backTitle = string.Empty;
+            //}
+
+
+            var wideBackImage = new Uri(AppData.MainItems[index].ImgUrl);
+            var backImage = new Uri(AppData.MainItems[index].ThumbUrl);
+
+            AppData.ChangeBackFlipTileData(backTitle, backContent, backImage, backContent, wideBackImage);
         }
 
         public string LoadFileFromIsoStorage(string jsonFileName)

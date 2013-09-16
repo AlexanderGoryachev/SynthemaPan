@@ -144,10 +144,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\AppBar\detailed_list.png" />
     <Content Include="Assets\AppBar\minus.png" />
     <Content Include="Assets\AppBar\new.png" />
     <Content Include="Assets\AppBar\next.png" />
     <Content Include="Assets\AppBar\refresh.png" />
+    <Content Include="Assets\AppBar\short_list.png" />
     <Content Include="Assets\bg.png" />
     <Content Include="Assets\lastfm.png" />
     <Content Include="Assets\logo.png" />
@@ -205,6 +207,12 @@
     <Reference Include="System.Xml.XPath">
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Microsoft SDKs\Silverlight\v4.0\Libraries\Client\System.Xml.XPath.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UpdateTileAgent\UpdateTileAgent.csproj">
+      <Project>{0B09DDB8-201C-4B9E-8BCE-ED6137CAD723}</Project>
+      <Name>UpdateTileAgent</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

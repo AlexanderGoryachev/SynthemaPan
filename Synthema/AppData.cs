@@ -126,7 +126,8 @@ namespace Synthema
         #region Settings
 
         public static bool IsLiveTileOn;
-        public static bool IsLiveTileSignsOn;
+        public static bool IsShortListOn;
+        //public static bool IsLiveTileSignsOn;
         
         #endregion
 
@@ -136,21 +137,17 @@ namespace Synthema
         {
             IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
 
-            bool liveTile;
-            bool liveTileSigns;
-
-            if (settings.TryGetValue<bool>("liveTile", out liveTile)) 
-                IsLiveTileOn = liveTile;
-
-            if (settings.TryGetValue<bool>("liveTileSigns", out liveTileSigns)) 
-                liveTileSigns = IsLiveTileSignsOn;
+            settings.TryGetValue<bool>("isLiveTileOn", out IsLiveTileOn);
+            settings.TryGetValue<bool>("isShortListOn", out IsShortListOn);
+            //settings.TryGetValue<bool>("isLiveTileSignsOn", out IsLiveTileSignsOn);
         }
 
         public static void SaveSettings()
         {
             IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
-            settings["liveTile"] = IsLiveTileOn;
-            settings["liveTileSigns"] = IsLiveTileSignsOn;
+            settings["isLiveTileOn"] = IsLiveTileOn;
+            settings["isShortListOn"] = IsShortListOn;
+            //settings["isLiveTileSignsOn"] = IsLiveTileSignsOn;
             settings.Save();
         }
 
@@ -159,14 +156,12 @@ namespace Synthema
             ShellTile apptile = ShellTile.ActiveTiles.First();
             FlipTileData appFlipTileData = new FlipTileData();
 
-            appFlipTileData.BackTitle = backTitle;
+            appFlipTileData.BackTitle = " ";
+            appFlipTileData.BackContent = " ";
+            appFlipTileData.WideBackContent = " ";
 
-            appFlipTileData.BackContent = backContent;
             appFlipTileData.BackBackgroundImage = backImage;
-
-            appFlipTileData.WideBackContent = wideBackContent;
             appFlipTileData.WideBackBackgroundImage = wideBackIamge;
-
             apptile.Update(appFlipTileData);
         }
 

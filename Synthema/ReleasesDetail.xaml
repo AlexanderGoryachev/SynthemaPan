@@ -14,9 +14,9 @@
     SupportedOrientations="Portrait" Orientation="Portrait">
 
     <phone:PhoneApplicationPage.Resources>
-        
+
         <converter:StringToBoolConverter xmlns:converter="clr-namespace:Synthema.Common" x:Key="StringToBoolConverter" />
-        
+
         <Style x:Key="HyperlinkButtonWrappingStyle"
         TargetType="HyperlinkButton">
             <Setter Property="Foreground"
@@ -33,7 +33,7 @@
                         <Border Background="Transparent">
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal" />                                        
+                                    <VisualState x:Name="Normal" />
                                     <VisualState x:Name="MouseOver" />
                                     <VisualState x:Name="Pressed">
                                         <Storyboard>
@@ -149,17 +149,17 @@
                             <Grid Background="{TemplateBinding Background}"
                                   Width="{TemplateBinding Width}"
                                   Height="{TemplateBinding Height}">
-                                    <Image Width="50"
+                                <Image Width="50"
                                            Height="50" 
                                            Source="Assets/play.png"/>
-                                </Grid>
+                            </Grid>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
     </phone:PhoneApplicationPage.Resources>
-    
+
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>
             <toolkit:NavigationInTransition.Backward>
@@ -170,7 +170,7 @@
             </toolkit:NavigationInTransition.Forward>
         </toolkit:NavigationInTransition>
     </toolkit:TransitionService.NavigationInTransition>
-    
+
     <toolkit:TransitionService.NavigationOutTransition>
         <toolkit:NavigationOutTransition>
             <toolkit:NavigationOutTransition.Backward>
@@ -181,7 +181,7 @@
             </toolkit:NavigationOutTransition.Forward>
         </toolkit:NavigationOutTransition>
     </toolkit:TransitionService.NavigationOutTransition>
-    
+
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Minimized" BackgroundColor="Black" ForegroundColor="White">
             <shell:ApplicationBar.MenuItems>
@@ -190,7 +190,7 @@
             <!--<shell:ApplicationBarIconButton IconUri="/Assets/AppBar/feature.search.png" Text="Открыть в браузере"/>-->
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
-    
+
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot">
         <Grid.Background>
@@ -211,8 +211,8 @@
                                    FontSize="24"
                                    Foreground="#FFFFFFFF"
                                    TextWrapping="Wrap" 
-                                   Margin="0,0,0,24" />                       
-                        
+                                   Margin="0,0,0,24" />
+
                         <StackPanel Orientation="Horizontal"
                                     Margin="0,0,0,24">
                             <StackPanel x:Name="BackgroundCoverImage"
@@ -221,7 +221,7 @@
                                         Margin="0,0,12,0"
                                         MinHeight="210"
                                         HorizontalAlignment="Left"
-                                        Visibility="Collapsed">                                
+                                        Visibility="Collapsed">
                                 <Image x:Name="CoverImage"                                    
                                        Width="210"
                                        VerticalAlignment="Center"
@@ -254,7 +254,7 @@
                             </ListBox>
 
                         </StackPanel>
-                        
+
                         <TextBlock x:Name="PromotextTextBlock" 
                                    FontSize="24" 
                                    TextWrapping="Wrap" 
@@ -272,7 +272,7 @@
                                  ScrollViewer.VerticalScrollBarVisibility="Disabled">
                             <ListBox.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                        <toolkit:WrapPanel/>
+                                    <toolkit:WrapPanel/>
                                 </ItemsPanelTemplate>
                             </ListBox.ItemsPanel>
                             <ListBox.ItemTemplate>
@@ -284,7 +284,7 @@
                                                      Height="99"
                                                      Margin="0,0,12,12" 
                                                      Background="Maroon"/>
-                            </DataTemplate>
+                                </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
                     </StackPanel>
@@ -315,7 +315,7 @@
                     </ListBox>
                 </Grid>
             </phone:PivotItem>
-            
+
             <phone:PivotItem Header="треклист">
                 <Grid>
                     <ListBox x:Name="TracklistListBox" Margin="12,0,0,0">
@@ -442,11 +442,11 @@
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
-                    </ListBox>                    
-                </Grid>             
+                    </ListBox>
+                </Grid>
             </phone:PivotItem>
 
-            <phone:PivotItem Header="похожие">
+            <!--<phone:PivotItem Header="похожие">
                 <Grid>
                     <TextBlock x:Name="NoSimilarTextBlock"                                
                                Text="Похожих альбомов нет" 
@@ -474,8 +474,8 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
                 </Grid>
-            </phone:PivotItem>
-            
+            </phone:PivotItem>-->
+
             <!--<phone:PivotItem Header="рейтинг">
                 <Grid>
                     <StackPanel Margin="0,0" Height="90" Width="400" HorizontalAlignment="Left">
@@ -491,8 +491,8 @@
                 </Grid>
             </phone:PivotItem>-->
 
-        </phone:Pivot>        
-        
+        </phone:Pivot>
+
         <Image HorizontalAlignment="Left" 
                Height="35" Margin="19,16,0,0" 
                VerticalAlignment="Top" Width="225" 
@@ -502,8 +502,8 @@
                      x:Name="TopPageProgressBar"
                      Foreground="#FFFFC800" 
                      VerticalAlignment="Top"/>
-        
+
         <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Margin="0,-32,0,0" Grid.Row="0" IsHitTestVisible="False" />-->
     </Grid>
-    
+
 </phone:PhoneApplicationPage>

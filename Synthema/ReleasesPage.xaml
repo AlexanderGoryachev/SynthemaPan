@@ -38,11 +38,11 @@
 
     <phone:PhoneApplicationPage.Resources>
         <shell:ApplicationBar x:Key="ShortMainAppBar" IsVisible="True" Mode="Minimized">
-            <shell:ApplicationBarIconButton x:Name="DChangeListAppButton" IconUri="/Assets/AppBar/new.png" Text="подробный список" Click="SetDetailedListAppButton_Click" />
+            <shell:ApplicationBarIconButton x:Name="DChangeListAppButton" IconUri="/Assets/AppBar/detailed_list.png" Text="подробный список" Click="SetDetailedListAppButton_Click" />
             <shell:ApplicationBarIconButton x:Name="DRefreshMainAppButton" IconUri="/Assets/AppBar/refresh.png" Text="Обновить" Click="RefreshAppButton_Click" />
         </shell:ApplicationBar>
         <shell:ApplicationBar x:Key="DetailedMainAppBar" IsVisible="True" Mode="Minimized">
-            <shell:ApplicationBarIconButton x:Name="SChangeListAppButton" IconUri="/Toolkit.Content/minus.png" Text="краткий список" Click="SetShortListAppButton_Click" />
+            <shell:ApplicationBarIconButton x:Name="SChangeListAppButton" IconUri="/Assets/AppBar/short_list.png" Text="краткий список" Click="SetShortListAppButton_Click" />
             <shell:ApplicationBarIconButton x:Name="SRefreshMainAppButton" IconUri="/Assets/AppBar/refresh.png" Text="Обновить" Click="RefreshAppButton_Click" />
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.Resources>
@@ -107,7 +107,7 @@
 
                                 <StackPanel Orientation="Horizontal" Margin="0,0,0,24">
                                     <Image Source="{Binding ThumbUrl}" 
-                                            Width="172"
+                                            Width="210"
                                             Margin="0,0,12,0"
                                             Grid.Column="0"   
                                             HorizontalAlignment="Left" 
@@ -152,11 +152,12 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid x:Name="ShortList"                                
-                              Margin="0,0,12,12"
-                              Width="432">
+                              Margin="0,0,12,24"
+                              Width="432"
+                              Tap="MainStackPanel_Tap">
                             <!-- 24 + 432 + 24 = 480 -->
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="184" />
+                                <ColumnDefinition Width="159" />
                                 <!-- image 172 + margin 12-->
                                 <ColumnDefinition Width="*" />
                                 <!-- 248 -->
@@ -171,31 +172,31 @@
                                         Grid.Row="0"
                                         Grid.Column="0"
                                         VerticalAlignment="Top"
-                                        MinHeight="172" 
+                                        MinHeight="147" 
                                         Margin="0,0,0,0">
                                 <Image x:Name="AnimatedImage" 
                                        Source="{Binding ThumbUrl}" 
-                                       Width="172"   
+                                       Width="147"   
                                        HorizontalAlignment="Center" 
                                        VerticalAlignment="Center"
                                        Tap="MainImage_Tap" />
                             </StackPanel>
 
-                            <StackPanel Width="248"
+                            <StackPanel Width="273"
                                         Grid.Row="0"
                                         Grid.Column="1"
                                         Margin="0,0,0,24" 
                                         Orientation="Vertical"
                                         VerticalAlignment="Stretch"
                                         Tap="MainStackPanel_Tap">
-                                <TextBlock Width="248"
+                                <TextBlock Width="273"
                                            Text="{Binding GroupTitle}"
                                            TextWrapping="Wrap" 
                                            FontFamily="Segoe WP Light"
                                            Foreground="#FFFFC800" 
                                            FontSize="34"
                                            Margin="0,-12,0,0"/>
-                                <TextBlock Width="248"
+                                <TextBlock Width="273"
                                            Text="{Binding AlbumTitle}"
                                            FontFamily="Segoe WP Light"
                                            Foreground="#FFFFFFFF"
