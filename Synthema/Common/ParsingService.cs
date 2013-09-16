@@ -98,7 +98,28 @@ namespace Synthema.Common
             }
         }
 
+        public static void ParseShortNewsHtml(string HtmlString)
+        {
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(HtmlString);
 
+            HtmlNodeCollection nodes = doc.DocumentNode.SelectNodes(@".//*[@id='dle-content']/div/div[@class='sceneNews0']");
+            if (nodes == null)
+                return;
 
+            AppData.NewsItems.Clear();
+
+            foreach (HtmlNode node in nodes)
+            {
+                var _title = node.SelectSingleNode(@"div[@class='title']/h2/a").InnerText;
+                var _link = node.SelectSingleNode(@"div[@class='title']/h2/a").GetAttributeValue("href", "http://");
+                
+                AppData.ShortNewsItems.Add(new AppData.ShortNewsItem
+                {
+                    Title = _title,
+                    Link = _link
+                });
+            }
+        }
     }
 }

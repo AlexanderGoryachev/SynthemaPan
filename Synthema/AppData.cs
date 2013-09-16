@@ -14,9 +14,12 @@ namespace Synthema
     class AppData
     {
 
-        #region
+        #region Flags
 
         public static bool IsMainDownloaded = false;
+        public static bool IsNewsDownloaded = false;
+        public static bool IsShortNewsDownloaded = false;
+        public static bool IsInternetAccess = true;
 
         #endregion
 
@@ -34,8 +37,6 @@ namespace Synthema
         #endregion
 
         #region Main
-
-        public static bool IsInternetAccess = true;
 
         public static string MainString = string.Empty;
 
@@ -57,7 +58,11 @@ namespace Synthema
 
         #region News
 
+        public static string NewsString = string.Empty;
+        public static string ShortNewsString = string.Empty;
+
         public static ObservableCollection<NewsItem> NewsItems = new ObservableCollection<NewsItem>();
+        public static ObservableCollection<ShortNewsItem> ShortNewsItems = new ObservableCollection<ShortNewsItem>();
 
         public class NewsItem
         {
@@ -67,6 +72,12 @@ namespace Synthema
             public string ThumbUrl { get; set; }
             public string Description { get; set; }
             public string PubDate { get; set; }
+        }
+
+        public class ShortNewsItem
+        {
+            public string Title { get; set; }
+            public string Link { get; set; }
         }
 
         #endregion
@@ -126,19 +137,17 @@ namespace Synthema
         #region Settings
 
         public static bool IsLiveTileOn;
-        public static bool IsShortListOn;
+        public static bool IsShortReleasesListOn;
+        public static bool IsShortNewsListOn;
         //public static bool IsLiveTileSignsOn;
-        
-        #endregion
-
-        #region AppMethods
 
         public static void LoadSettings()
         {
             IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
 
             settings.TryGetValue<bool>("isLiveTileOn", out IsLiveTileOn);
-            settings.TryGetValue<bool>("isShortListOn", out IsShortListOn);
+            settings.TryGetValue<bool>("isShortReleasesListOn", out IsShortReleasesListOn);
+            settings.TryGetValue<bool>("isShortNewsListOn", out IsShortNewsListOn);
             //settings.TryGetValue<bool>("isLiveTileSignsOn", out IsLiveTileSignsOn);
         }
 
@@ -146,10 +155,15 @@ namespace Synthema
         {
             IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
             settings["isLiveTileOn"] = IsLiveTileOn;
-            settings["isShortListOn"] = IsShortListOn;
+            settings["isShortReleasesListOn"] = IsShortReleasesListOn;
+            settings["isShortNewsListOn"] = IsShortNewsListOn;
             //settings["isLiveTileSignsOn"] = IsLiveTileSignsOn;
             settings.Save();
         }
+        
+        #endregion
+
+        #region AppMethods
 
         public static void ChangeBackFlipTileData(string backTitle, string backContent, Uri backImage, string wideBackContent, Uri wideBackIamge)
         {

@@ -13,7 +13,7 @@ namespace Synthema.Common
     class DownloadingService
     {
         public static WebClient webClient = new WebClient();
-        public static void DownloadMainAndNews(string Path)
+        public static void DownloadString(string Path)
         {
             webClient.Encoding = new Windows1251Encoding();
             webClient.DownloadStringAsync(new Uri(Path));

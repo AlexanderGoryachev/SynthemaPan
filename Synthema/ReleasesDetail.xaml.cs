@@ -55,7 +55,7 @@ namespace Synthema
             ParseReleasesDetail(e.Result);
 
             CommentsListBox.ItemsSource = AppData.Comments;
-            SimilarListBox.ItemsSource = AppData.SimilarLinks;
+            //SimilarListBox.ItemsSource = AppData.SimilarLinks;
 
             TopPageProgressBar.IsIndeterminate = false;
         }

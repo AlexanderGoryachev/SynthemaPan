@@ -81,5 +81,10 @@ namespace Synthema
                 NavigationService.RemoveBackEntry();
             base.OnBackKeyPress(e);
         }
+
+        private void News_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/NewsPage.xaml", UriKind.Relative));
+        }
     }
 }

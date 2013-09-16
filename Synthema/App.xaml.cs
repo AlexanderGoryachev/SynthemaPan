@@ -89,7 +89,7 @@ namespace Synthema
             else
                 AppData.IsInternetAccess = true;
 
-            DownloadingService.DownloadMainAndNews(Constants.BaseUrl);
+            DownloadingService.DownloadString(Constants.BaseUrl);
         }
 
         // Code to execute when the application is activated (brought to foreground)

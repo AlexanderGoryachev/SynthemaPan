@@ -17,7 +17,7 @@ namespace Synthema
         {
             InitializeComponent();
 
-            DownloadingService.webClient.DownloadStringCompleted += new DownloadStringCompletedEventHandler(MainStringDownloadCompleted);
+            DownloadingService.webClient.DownloadStringCompleted += new DownloadStringCompletedEventHandler(DownloadStringCompleted);
 
             MainListBox.ItemsSource = AppData.MainItems;
             ShortMainListBox.ItemsSource = AppData.MainItems;
@@ -25,13 +25,13 @@ namespace Synthema
             if (!AppData.IsInternetAccess)
                 MessageBox.Show("Подключение к Интернету отсутствует. Для работы приложения необходим доступ к сети");
 
-            if (AppData.IsMainDownloaded)
-                LoadingBar.IsIndeterminate = false;
-            else
-                LoadingBar.IsIndeterminate = true;
+            //if (AppData.IsMainDownloaded)
+            //    LoadingBar.IsIndeterminate = false;
+            //else
+            //    LoadingBar.IsIndeterminate = true;
         }
 
-        public void MainStringDownloadCompleted(object sender, DownloadStringCompletedEventArgs e)
+        public void DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
             if (e.Error != null)
                 return;
@@ -47,11 +47,16 @@ namespace Synthema
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (AppData.IsShortListOn) SetShortList();
+            if (AppData.IsShortReleasesListOn) SetShortList();
             else SetDetailedList();
 
-            if (AppData.IsMainDownloaded) LoadingBar.IsIndeterminate = false;
-            else DownloadingService.DownloadMainAndNews(Constants.BaseUrl);
+            if (AppData.IsMainDownloaded)
+                LoadingBar.IsIndeterminate = false;
+            else
+            {
+                LoadingBar.IsIndeterminate = true;
+                DownloadingService.DownloadString(Constants.BaseUrl);
+            }
 
             base.OnNavigatedTo(e);
         }
@@ -59,7 +64,7 @@ namespace Synthema
         private void MainImage_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             int index;
-            if (AppData.IsShortListOn) index = ShortMainListBox.SelectedIndex;
+            if (AppData.IsShortReleasesListOn) index = ShortMainListBox.SelectedIndex;
             else index = MainListBox.SelectedIndex;
 
             string imgUrl = AppData.MainItems.ElementAt(index).ImgUrl;
@@ -69,7 +74,7 @@ namespace Synthema
         private void MainStackPanel_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             int index;
-            if (AppData.IsShortListOn) index = ShortMainListBox.SelectedIndex;
+            if (AppData.IsShortReleasesListOn) index = ShortMainListBox.SelectedIndex;
             else index = MainListBox.SelectedIndex;
 
             var releasesDetailPath = AppData.MainItems.ElementAt(index).Link;
@@ -85,19 +90,19 @@ namespace Synthema
         private void RefreshAppButton_Click(object sender, EventArgs e)
         {
             LoadingBar.IsIndeterminate = true;
-            DownloadingService.DownloadMainAndNews(Constants.BaseUrl);
+            DownloadingService.DownloadString(Constants.BaseUrl);
         }
 
         private void SetShortListAppButton_Click(object sender, EventArgs e)
         {
             SetShortList();
-            AppData.IsShortListOn = true;
+            AppData.IsShortReleasesListOn = true;
         }
 
         private void SetDetailedListAppButton_Click(object sender, EventArgs e)
         {
             SetDetailedList();
-            AppData.IsShortListOn = false;
+            AppData.IsShortReleasesListOn = false;
         }
 
         private void SetShortList()
